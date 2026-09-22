@@ -16,10 +16,9 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    // Create Category
     @PostMapping("/categories")
     public Category createCategory(@RequestBody Category categoryObject) {
-        System.out.println("Calling createCategory ==> ");
-
         Category category = categoryRepository.findByName(categoryObject.getName());
         if (category != null) {
             throw new InformationExistException("Category with name" + category.getName() + " already exists");
@@ -28,25 +27,23 @@ public class CategoryService {
         }
     }
 
+    // Get Categories
     public List<Category> getCategories() {
-        System.out.println("Service Calling getCategories");
-
         return categoryRepository.findAll();
     }
 
+    // Get Category
     public Category getCategory(Long id) {
-        System.out.println("Service Calling getCategory");
-
         return categoryRepository.findById(id).orElseThrow(() -> new InformationNotFoundException("Category not found with id: " + id));
     }
 
-    // Update
+    // Update Category
     public Category updateCategory(Long id, Category category) {
         category.setId(id);
         return categoryRepository.save(category);
     }
 
-    // Delete
+    // Delete Category
     public void deleteCategory(Long id) {
         categoryRepository.deleteById(id);
     }
