@@ -14,6 +14,12 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    // Get
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello World !";
+    }
+
     // Post
     @PostMapping("/categories")
     public Category createCategory(@RequestBody Category categoryObject) {
