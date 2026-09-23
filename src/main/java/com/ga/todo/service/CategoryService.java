@@ -6,25 +6,37 @@ import com.ga.todo.model.Category;
 import com.ga.todo.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
 @Service
 public class CategoryService {
+
     @Autowired
     private CategoryRepository categoryRepository;
 
-    // Create Category
-    @PostMapping("/categories")
-    public Category createCategory(@RequestBody Category categoryObject) {
-        Category category = categoryRepository.findByName(categoryObject.getName());
-        if (category != null) {
-            throw new InformationExistException("Category with name" + category.getName() + " already exists");
-        } else {
-            return categoryRepository.save(categoryObject);
+    // Check if Category exists by ID
+    private Category checkExistById(Long id) {
+        return categoryRepository.findById(id)
+                .orElseThrow(() ->
+                        new InformationNotFoundException("Category not found with id: " + id)
+                );
+    }
+
+    // Check if Category exists by Name
+    private void checkExistByName(String name) {
+        if (categoryRepository.findByName(name) != null) {
+            throw new InformationExistException(
+                    "Category with name " + name + " already exists"
+            );
         }
+    }
+
+    // Create Category
+    public Category createCategory(Category categoryObject) {
+        checkExistByName(categoryObject.getName());
+
+        return categoryRepository.save(categoryObject);
     }
 
     // Get Categories
@@ -34,17 +46,22 @@ public class CategoryService {
 
     // Get Category
     public Category getCategory(Long id) {
-        return categoryRepository.findById(id).orElseThrow(() -> new InformationNotFoundException("Category not found with id: " + id));
+        return checkExistById(id);
     }
 
     // Update Category
-    public Category updateCategory(Long id, Category category) {
-        category.setId(id);
-        return categoryRepository.save(category);
+    public Category updateCategory(Long id, Category categoryObject) {
+        checkExistById(id);
+        categoryObject.setId(id);
+
+        return categoryRepository.save(categoryObject);
     }
+
 
     // Delete Category
     public void deleteCategory(Long id) {
-        categoryRepository.deleteById(id);
+        Category category = checkExistById(id);
+
+        categoryRepository.delete(category);
     }
 }
