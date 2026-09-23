@@ -51,10 +51,11 @@ public class CategoryService {
 
     // Update Category
     public Category updateCategory(Long id, Category categoryObject) {
-        checkExistById(id);
-        categoryObject.setId(id);
+        Category existingCategory = checkExistById(id);
+        existingCategory.setName(categoryObject.getName());
+        existingCategory.setDescription(categoryObject.getDescription());
 
-        return categoryRepository.save(categoryObject);
+        return categoryRepository.save(existingCategory);
     }
 
 
