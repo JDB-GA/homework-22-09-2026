@@ -6,6 +6,7 @@ import com.ga.todo.model.Category;
 import com.ga.todo.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -14,6 +15,9 @@ public class CategoryService {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private ImageStorageService imageStorageService;
 
     // Check if Category exists by ID
     private Category checkExistById(Long id) {
@@ -56,6 +60,13 @@ public class CategoryService {
         existingCategory.setDescription(categoryObject.getDescription());
 
         return categoryRepository.save(existingCategory);
+    }
+
+    public Category uploadImage(Long id, MultipartFile image) {
+        Category category = checkExistById(id);
+        category.setImageUrl(imageStorageService.store(image));
+
+        return categoryRepository.save(category);
     }
 
 

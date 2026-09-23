@@ -22,11 +22,13 @@ public class Category {
     @Column
     private String description;
 
+    @Column
+    private String imageUrl;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 }
-
 

@@ -4,6 +4,7 @@ import com.ga.todo.model.Category;
 import com.ga.todo.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -24,6 +25,14 @@ public class CategoryController {
     @PostMapping("/categories")
     public Category createCategory(@RequestBody Category categoryObject) {
         return categoryService.createCategory(categoryObject);
+    }
+
+    @PostMapping("/categories/{id}/image")
+    public Category uploadImage(
+            @PathVariable Long id,
+            @RequestParam("image") MultipartFile image
+    ) {
+        return categoryService.uploadImage(id, image);
     }
 
     // Get

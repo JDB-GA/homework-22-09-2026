@@ -20,20 +20,22 @@ This approach keeps the development organized and makes it easier to identify an
 - Category CRUD implemented.
 - PostgreSQL database connected.
 - Category timestamps added.
+- Category image uploads added.
 - Item functionality is not included yet.
 
 ## Endpoints
 
 Base URL: `http://localhost:8080/api`
 
-| Method | Path | Example |
-| --- | --- | --- |
-| GET | `/hello` | `curl http://localhost:8080/api/hello` |
-| GET | `/categories` | `curl http://localhost:8080/api/categories` |
-| GET | `/category/{id}` | `curl http://localhost:8080/api/category/1` |
-| POST | `/categories` | `curl -X POST http://localhost:8080/api/categories -H 'Content-Type: application/json' -d '{"name":"Work","description":"Work tasks"}'` |
-| PUT | `/category/{id}` | `curl -X PUT http://localhost:8080/api/category/1 -H 'Content-Type: application/json' -d '{"name":"Personal","description":"Personal tasks"}'` |
-| DELETE | `/category/{id}` | `curl -X DELETE http://localhost:8080/api/category/1` |
+| Method | Path                     | Example                                                                                                                                        |
+|--------|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| GET    | `/hello`                 | `curl http://localhost:8080/api/hello`                                                                                                         |
+| GET    | `/categories`            | `curl http://localhost:8080/api/categories`                                                                                                    |
+| GET    | `/category/{id}`         | `curl http://localhost:8080/api/category/1`                                                                                                    |
+| POST   | `/categories`            | `curl -X POST http://localhost:8080/api/categories -H 'Content-Type: application/json' -d '{"name":"Work","description":"Work tasks"}'`        |
+| POST   | `/categories/{id}/image` | `curl -X POST http://localhost:8080/api/categories/1/image -F 'image=@/full/path/image.jpg'`                                                   |
+| PUT    | `/category/{id}`         | `curl -X PUT http://localhost:8080/api/category/1 -H 'Content-Type: application/json' -d '{"name":"Personal","description":"Personal tasks"}'` |
+| DELETE | `/category/{id}`         | `curl -X DELETE http://localhost:8080/api/category/1`                                                                                          |
 
 ## What Went Right
 
