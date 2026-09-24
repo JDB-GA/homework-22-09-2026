@@ -16,13 +16,13 @@ public class ItemService {
     private final ItemRepository ItemRepository;
     public final CategoryRepository categoryRepository;
 
-    public Item createItem(Long categoryId, Item Item) {
+    public Item createItem(Long categoryId, Item item) {
         Category category = categoryRepository.findById(categoryId).orElseThrow(
                 () -> new InformationNotFoundException("Category with id " + categoryId + " not found")
         );
-        Item.setCategory(category);
+        item.setCategory(category);
 
-        return ItemRepository.save(Item);
+        return ItemRepository.save(item);
     }
 
     public List<Item> getAllItems() {
@@ -30,19 +30,19 @@ public class ItemService {
         return ItemRepository.findAll();
     }
 
-    public Item getItem(Long ItemId) {
-        return ItemRepository.findById(ItemId).orElseThrow(
-                () -> new InformationNotFoundException("Item with id " + ItemId + " not found")
+    public Item getItem(Long itemId) {
+        return ItemRepository.findById(itemId).orElseThrow(
+                () -> new InformationNotFoundException("Item with id " + itemId + " not found")
         );
     }
 
-    public Item updateItem(Long ItemId, Item Item) {
-        Item oldItem = getItem(ItemId);
+    public Item updateItem(Long itemId, Item item) {
+        Item oldItem = getItem(itemId);
 
-        oldItem.setName(Item.getName());
-        oldItem.setDescription(Item.getDescription());
-        oldItem.setDueDate(Item.getDueDate());
-        oldItem.setCategory(Item.getCategory());
+        oldItem.setName(item.getName());
+        oldItem.setDescription(item.getDescription());
+        oldItem.setDueDate(item.getDueDate());
+        oldItem.setCategory(item.getCategory());
 
         return ItemRepository.save(oldItem);
     }
