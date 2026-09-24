@@ -42,7 +42,6 @@ public class ItemService {
         oldItem.setName(item.getName());
         oldItem.setDescription(item.getDescription());
         oldItem.setDueDate(item.getDueDate());
-        oldItem.setCategory(item.getCategory());
 
         return ItemRepository.save(oldItem);
     }
