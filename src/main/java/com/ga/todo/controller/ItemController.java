@@ -15,9 +15,9 @@ public class ItemController {
 
 
     @PostMapping("/categories/{categoryId}/items")
-    public Item createItem(@PathVariable("categoryId") Long categoryId, @RequestBody Item ItemObject) {
+    public Item createItem(@PathVariable("categoryId") Long categoryId, @RequestBody Item itemObject) {
 
-        return ItemService.createItem(categoryId, ItemObject);
+        return ItemService.createItem(categoryId, itemObject);
     }
 
     @GetMapping("/categories/items")
@@ -33,9 +33,9 @@ public class ItemController {
     }
 
     @PutMapping("/categories/items/{id}")
-    public Item updateItem(@PathVariable("id") Long id, @RequestBody Item ItemObject) {
+    public Item updateItem(@PathVariable("id") Long id, @RequestBody Item itemObject) {
 
-        return ItemService.updateItem(id, ItemObject);
+        return ItemService.updateItem(id, itemObject);
     }
 
     @DeleteMapping("/categories/items/{id}")
