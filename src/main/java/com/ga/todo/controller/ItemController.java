@@ -20,25 +20,25 @@ public class ItemController {
         return ItemService.createItem(categoryId, ItemObject);
     }
 
-    @GetMapping("/items")
+    @GetMapping("/categories/items")
     public List<Item> getAllItems() {
 
         return ItemService.getAllItems();
     }
 
-    @GetMapping("/item/{id}")
+    @GetMapping("/categories/items/{id}")
     public Item getItem(@PathVariable("id") Long id) {
 
         return ItemService.getItem(id);
     }
 
-    @PutMapping("/item/{id}")
+    @PutMapping("/categories/items/{id}")
     public Item updateItem(@PathVariable("id") Long id, @RequestBody Item ItemObject) {
 
         return ItemService.updateItem(id, ItemObject);
     }
 
-    @DeleteMapping("/item/{id}")
+    @DeleteMapping("/categories/items/{id}")
     public void deleteItem(@PathVariable("id") Long id) {
 
         ItemService.deleteItem(id);
