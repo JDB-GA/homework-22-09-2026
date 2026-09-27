@@ -20,28 +20,28 @@ public class ItemController {
         return ItemService.createItem(categoryId, itemObject);
     }
 
-    @GetMapping("/categories/items")
-    public List<Item> getAllItems() {
+    @GetMapping("/categories/{categoryId}/items")
+    public List<Item> getAllItems(@PathVariable("categoryId") Long categoryId) {
 
-        return ItemService.getAllItems();
+        return ItemService.getAllItems(categoryId);
     }
 
-    @GetMapping("/categories/items/{id}")
-    public Item getItem(@PathVariable("id") Long id) {
+    @GetMapping("/categories/{categoryId}/items/{itemId}")
+    public Item getItem(@PathVariable("categoryId") Long categoryId, @PathVariable("itemId") Long itemId) {
 
-        return ItemService.getItem(id);
+        return ItemService.getItem(categoryId, itemId);
     }
 
-    @PutMapping("/categories/items/{id}")
-    public Item updateItem(@PathVariable("id") Long id, @RequestBody Item itemObject) {
+    @PutMapping("/categories/{categoryId}/items/{itemId}")
+    public Item updateItem(@PathVariable("categoryId") Long categoryId, @PathVariable("itemId") Long itemId, @RequestBody Item itemObject) {
 
-        return ItemService.updateItem(id, itemObject);
+        return ItemService.updateItem(categoryId, itemId, itemObject);
     }
 
-    @DeleteMapping("/categories/items/{id}")
-    public void deleteItem(@PathVariable("id") Long id) {
+    @DeleteMapping("/categories/{categoryId}/items/{itemId}")
+    public void deleteItem(@PathVariable("categoryId") Long categoryId, @PathVariable("itemId") Long itemId) {
 
-        ItemService.deleteItem(id);
+        ItemService.deleteItem(categoryId, itemId);
     }
 
 }

@@ -43,14 +43,14 @@ public class CategoryController {
     }
 
     // Get
-    @GetMapping("/category/{id}")
+    @GetMapping("/categories/{id}")
     public Category getCategory(@PathVariable Long id) {
         System.out.println("Calling getCategory");
         return categoryService.getCategory(id);
     }
 
     // Put
-    @PutMapping("/category/{id}")
+    @PutMapping("/categories/{id}")
     public Category updateCategory(@PathVariable Long id, @RequestBody Category categoryObject) {
         System.out.println("Calling Update Category");
 
@@ -58,7 +58,7 @@ public class CategoryController {
     }
 
     // Delete
-    @DeleteMapping("/category/{id}")
+    @DeleteMapping("/categories/{id}")
     public void deleteCategory(@PathVariable Long id) {
         System.out.println("Calling Delete Category");
         categoryService.deleteCategory(id);

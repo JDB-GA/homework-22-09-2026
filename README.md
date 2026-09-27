@@ -34,11 +34,11 @@ Base URL: `http://localhost:8080/api`
 |--------|------------------------------|
 | GET    | `/api/hello`                 |
 | GET    | `/api/categories`            |
-| GET    | `/api/category/{id}`         |
+| GET    | `/api/categories/{id}`       |
 | POST   | `/api/categories`            |
 | POST   | `/api/categories/{id}/image` |
-| PUT    | `/api/category/{id}`         |
-| DELETE | `/api/category/{id}`         |
+| PUT    | `/api/categories/{id}`       |
+| DELETE | `/api/categories/{id}`       |
 
 ### Item Endpoints
 

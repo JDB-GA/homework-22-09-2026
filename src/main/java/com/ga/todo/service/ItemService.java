@@ -16,28 +16,35 @@ public class ItemService {
     private final ItemRepository ItemRepository;
     public final CategoryRepository categoryRepository;
 
-    public Item createItem(Long categoryId, Item item) {
-        Category category = categoryRepository.findById(categoryId).orElseThrow(
+    private Category getCategory(Long categoryId) {
+        return categoryRepository.findById(categoryId).orElseThrow(
                 () -> new InformationNotFoundException("Category with id " + categoryId + " not found")
         );
+    }
+
+    public Item createItem(Long categoryId, Item item) {
+        Category category = getCategory(categoryId);
         item.setCategory(category);
 
         return ItemRepository.save(item);
     }
 
-    public List<Item> getAllItems() {
+    public List<Item> getAllItems(Long categoryId) {
+        getCategory(categoryId);
 
-        return ItemRepository.findAll();
+        return ItemRepository.findByCategoryId(categoryId);
     }
 
-    public Item getItem(Long itemId) {
-        return ItemRepository.findById(itemId).orElseThrow(
-                () -> new InformationNotFoundException("Item with id " + itemId + " not found")
+    public Item getItem(Long categoryId, Long itemId) {
+        getCategory(categoryId);
+
+        return ItemRepository.findByIdAndCategoryId(itemId, categoryId).orElseThrow(
+                () -> new InformationNotFoundException("Item with id " + itemId + " not found in category " + categoryId)
         );
     }
 
-    public Item updateItem(Long itemId, Item item) {
-        Item oldItem = getItem(itemId);
+    public Item updateItem(Long categoryId, Long itemId, Item item) {
+        Item oldItem = getItem(categoryId, itemId);
 
         oldItem.setName(item.getName());
         oldItem.setDescription(item.getDescription());
@@ -46,8 +53,8 @@ public class ItemService {
         return ItemRepository.save(oldItem);
     }
 
-    public void deleteItem(Long ItemId) {
-        Item oldItem = getItem(ItemId);
+    public void deleteItem(Long categoryId, Long ItemId) {
+        Item oldItem = getItem(categoryId, ItemId);
 
         ItemRepository.delete(oldItem);
     }
