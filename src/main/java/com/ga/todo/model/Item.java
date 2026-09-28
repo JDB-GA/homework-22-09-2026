@@ -33,11 +33,6 @@ public class Item {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
     @Column
     @CreationTimestamp
     private LocalDateTime createdTime;

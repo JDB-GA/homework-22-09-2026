@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "users")
-@ToString(exclude = {"password", "userProfile", "itemList", "categoryList"})
+@ToString(exclude = {"password", "userProfile", "categoryList"})
 public class User {
     @Id
     @Column
@@ -31,9 +31,6 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
     private UserProfile userProfile;
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Item> itemList;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Category> categoryList;

@@ -16,8 +16,9 @@ public class ItemService {
     private final ItemRepository ItemRepository;
     public final CategoryRepository categoryRepository;
 
+    // Only finds the category if it belongs to the logged-in user
     private Category getCategory(Long categoryId) {
-        return categoryRepository.findById(categoryId).orElseThrow(
+        return categoryRepository.findByIdAndUserId(categoryId, CategoryService.getCurrentLoggedInUser().getId()).orElseThrow(
                 () -> new InformationNotFoundException("Category with id " + categoryId + " not found")
         );
     }
