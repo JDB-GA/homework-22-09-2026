@@ -1,5 +1,6 @@
 package com.ga.todo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -28,6 +29,11 @@ public class Category {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "category", orphanRemoval = true)
     private List<Item> items;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
